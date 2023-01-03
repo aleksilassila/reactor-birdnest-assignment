@@ -1,12 +1,15 @@
-import express, {Router} from "express";
+import express, { Router } from "express";
+import DroneListener from "./drone-listener";
 
 const app = express();
 const router = Router();
 
+const droneListener = new DroneListener();
+
 app.use(express.json());
 
-router.get("/", (req, res) => {
-  res.send("Hello World!");
+router.get("/violations", (req, res) => {
+  res.send(droneListener.violations);
 });
 
 app.use("/api", router);
