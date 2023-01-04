@@ -1,6 +1,5 @@
 "use client";
 import useViolations from "./(hooks)/useViolations";
-import classNames from "classnames";
 
 function Violations() {
   const { isLoading, violations } = useViolations();
@@ -53,8 +52,6 @@ function Violations() {
 }
 
 export default function Page() {
-  const gridClassName = classNames("grid grid-cols-3 gap-4");
-
   return (
     <div className="flex-1 flex flex-col items-center px-8 md:px-16 max-h-screen">
       <div className="font-bold text-4xl text-center mt-16">
@@ -64,7 +61,7 @@ export default function Page() {
         A real time list of violators of the no drone zone near Monadikuikka
         nest from the past 10 minutes.
       </div>
-      <div className="overflow-x-scroll flex-shrink">
+      <div className="overflow-y-scroll flex-shrink max-w-screen-2xl">
         <Violations />
       </div>
       <div className="flex-1 text-sm font-medium text-zinc-500 py-4">
