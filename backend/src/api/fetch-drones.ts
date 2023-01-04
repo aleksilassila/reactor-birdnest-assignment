@@ -1,5 +1,4 @@
 import Api from "./api";
-import { Drone } from "../types/api";
 
 interface DroneParsed {
   serialNumber: string[];
@@ -23,6 +22,19 @@ interface FetchDronesResponseParsed {
       drone: DroneParsed[];
     }[];
   };
+}
+
+export interface Drone {
+  serialNumber: string;
+  model: string;
+  manufacturer: string;
+  mac: string;
+  ipv4: string;
+  ipv6: string;
+  firmware: string;
+  positionY: number;
+  positionX: number;
+  altitude: number;
 }
 
 export default async function fetchDrones(): Promise<{

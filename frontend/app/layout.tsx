@@ -1,7 +1,7 @@
 "use client";
 import "./global.css";
-import {QueryClient, QueryClientProvider} from "react-query";
-import {ReactQueryDevtools} from "react-query/devtools";
+import { QueryClient, QueryClientProvider } from "react-query";
+import { ReactQueryDevtools } from "react-query/devtools";
 import React from "react";
 
 const queryClient = new QueryClient({
@@ -26,10 +26,9 @@ export default function RootLayout({
       <head>
         <title>Birdnest Assignment</title>
       </head>
-      <body className="min-h-screen flex flex-col">
+      <body className="min-h-screen flex flex-col bg-zinc-900 text-zinc-200">
         <QueryClientProvider client={queryClient}>
-            {children}
-          <ReactQueryDevtools initialIsOpen={false} />
+          {children}
         </QueryClientProvider>
       </body>
     </html>

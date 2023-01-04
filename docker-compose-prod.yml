@@ -22,7 +22,6 @@ services:
       dockerfile: Dockerfile.prod
     restart: on-failure
     environment:
-      ENDPOINT: ${ENDPOINT}
       NODE_ENV: production
     networks:
       - birdnest
@@ -33,7 +32,6 @@ services:
       dockerfile: Dockerfile.prod
     restart: on-failure
     environment:
-      ENDPOINT: ${ENDPOINT}
       NODE_ENV: production
     networks:
       - birdnest

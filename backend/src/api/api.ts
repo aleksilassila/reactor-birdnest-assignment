@@ -3,7 +3,7 @@ import xml2js from "xml2js";
 
 const parser = new xml2js.Parser();
 const axiosInstance = axios.create({
-  baseURL: "http://assignments.reaktor.com/birdnest",
+  baseURL: "https://assignments.reaktor.com/birdnest",
 });
 
 export default class Api {
