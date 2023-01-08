@@ -9,6 +9,8 @@ const TRACKING_RADIUS = 100000;
 
 const VIOLATION_REMEMBER_TIME_MS = 1000 * 60 * 10;
 
+const REFRESH_TIME_MS = 4000;
+
 export interface Violation {
   timeOfViolation: Date;
   violationDistanceInMeters: number;
@@ -23,7 +25,10 @@ export default class DroneListener {
 
   constructor(io: Server) {
     this.io = io;
-    this.listenerInterval = setInterval(() => this.updateData(), 2000);
+    this.listenerInterval = setInterval(
+      () => this.updateData(),
+      REFRESH_TIME_MS
+    );
   }
 
   async updateData() {

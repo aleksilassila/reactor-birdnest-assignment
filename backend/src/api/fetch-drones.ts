@@ -1,4 +1,5 @@
 import Api from "./api";
+import { AxiosError } from "axios";
 
 interface DroneParsed {
   serialNumber: string[];
@@ -37,10 +38,20 @@ export interface Drone {
   altitude: number;
 }
 
+let rateLimitedAt: Date = new Date();
+let rateLimitCooldown = 1000 * 10;
+
 export default async function fetchDrones(): Promise<{
   timestamp: Date;
   drones: Drone[];
 }> {
+  if (rateLimitedAt.getTime() + rateLimitCooldown > Date.now()) {
+    return {
+      timestamp: new Date(),
+      drones: [],
+    };
+  }
+
   return Api.fetchXML<FetchDronesResponseParsed>("/drones")
     .then((data) => ({
       timestamp: new Date(data.report.capture[0].$.snapshotTimestamp),
@@ -58,6 +69,13 @@ export default async function fetchDrones(): Promise<{
       })),
     }))
     .catch((err) => {
+      if (err instanceof AxiosError) {
+        const axiosError = err as AxiosError;
+        if (axiosError.status === 429) {
+          rateLimitedAt = new Date();
+        }
+      }
+
       console.error(err);
       return { timestamp: new Date(), drones: [] };
     });
